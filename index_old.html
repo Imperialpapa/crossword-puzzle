@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordHunt - 트렌디한 워드 퍼즐</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="WordHunt">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23667eea'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='40' fill='white' font-family='Arial'%3EW%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>WordHunt</h1>
+            </div>
+            <div class="header-controls">
+                <button class="btn-icon theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn-icon sound-toggle" id="soundToggle">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button class="btn-icon" id="helpBtn">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <main class="main-container">
+        <!-- Start Screen -->
+        <div class="screen start-screen active" id="startScreen">
+            <div class="card welcome-card">
+                <h2>십자말풀이에 오신 것을 환영합니다!</h2>
+                <p>가로세로 단어 퍼즐을 완성해보세요</p>
+                
+                <!-- Game Settings -->
+                <div class="settings-grid">
+                    <div class="setting-group">
+                        <label for="gridSize">그리드 크기</label>
+                        <select id="gridSize" class="select-modern">
+                            <option value="10">10 x 10</option>
+                            <option value="15" selected>15 x 15</option>
+                            <option value="20">20 x 20</option>
+                            <option value="25">25 x 25</option>
+                            <option value="30">30 x 30</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="language">언어</label>
+                        <select id="language" class="select-modern">
+                            <option value="english" selected>English</option>
+                            <option value="korean">한국어</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="difficulty">난이도</label>
+                        <div class="difficulty-slider">
+                            <input type="range" id="difficulty" min="1" max="10" value="5" class="slider">
+                            <div class="slider-value">5</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary btn-large" id="startGame">
+                        <i class="fas fa-play"></i>
+                        게임 시작
+                    </button>
+                    <button class="btn btn-secondary" id="highScoreBtn">
+                        <i class="fas fa-trophy"></i>
+                        최고 기록
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="screen game-screen" id="gameScreen">
+            <!-- Game Header -->
+            <div class="game-header">
+                <div class="game-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span class="timer" id="timer">60</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-star"></i>
+                        <span class="score" id="score">0</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-search"></i>
+                        <span class="found-words" id="foundWords">0</span>/<span id="totalWords">0</span>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button class="btn btn-hint" id="hintBtn">
+                        <i class="fas fa-lightbulb"></i>
+                        힌트
+                    </button>
+                    <button class="btn btn-secondary" id="pauseBtn">
+                        <i class="fas fa-pause"></i>
+                        일시정지
+                    </button>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <!-- Word Grid -->
+                <div class="grid-container">
+                    <div class="word-grid" id="wordGrid"></div>
+                </div>
+
+                <!-- Word List -->
+                <div class="word-list-container">
+                    <h3>단서 (Clues)</h3>
+                    <div class="word-list" id="wordList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Score Screen -->
+        <div class="screen high-score-screen" id="highScoreScreen">
+            <div class="card score-card">
+                <h2><i class="fas fa-trophy"></i> 최고 기록</h2>
+                <div class="score-list" id="scoreList"></div>
+                <button class="btn btn-secondary" id="backToMenuBtn">
+                    <i class="fas fa-arrow-left"></i>
+                    메뉴로 돌아가기
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div class="screen game-over-screen" id="gameOverScreen">
+            <div class="card game-over-card">
+                <div class="game-over-content" id="gameOverContent">
+                    <!-- Content will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Pause Modal -->
+    <div class="modal" id="pauseModal">
+        <div class="modal-content">
+            <h3>일시정지</h3>
+            <p>게임이 일시정지되었습니다.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-primary" id="resumeBtn">계속하기</button>
+                <button class="btn btn-secondary" id="quitBtn">종료</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Name Input Modal -->
+    <div class="modal" id="nameModal">
+        <div class="modal-content">
+            <h3>새로운 최고 기록!</h3>
+            <p>축하합니다! 이름을 입력해주세요.</p>
+            <input type="text" id="playerName" placeholder="이름을 입력하세요" maxlength="15">
+            <div class="modal-buttons">
+                <button class="btn btn-primary" id="saveScoreBtn">저장</button>
+                <button class="btn btn-secondary" id="skipNameBtn">건너뛰기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal" id="helpModal">
+        <div class="modal-content">
+            <h3>게임 방법</h3>
+            <div class="help-content">
+                <p><strong>목표:</strong> 십자말풀이를 완성하세요.</p>
+                <p><strong>조작:</strong> 칸을 클릭하고 키보드로 글자를 입력하세요.</p>
+                <p><strong>방향키:</strong> 셀 간 이동</p>
+                <p><strong>Tab:</strong> 가로/세로 방향 전환</p>
+                <p><strong>백스페이스:</strong> 글자 지우기</p>
+                <p><strong>Space:</strong> 힌트 보기</p>
+                <p><strong>점수:</strong> 단어 길이와 난이도에 따라 계산</p>
+            </div>
+            <button class="btn btn-primary" id="closeHelpBtn">확인</button>
+        </div>
+    </div>
+
+    <!-- Celebration Canvas for 3D Effects -->
+    <canvas id="celebrationCanvas"></canvas>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="crossword.js"></script>
+</body>
+</html>
