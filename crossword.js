@@ -1232,16 +1232,8 @@ class AdvancedCrosswordGame {
             }
         });
 
-        // NEW LOGIC: Automatically select the first available word (Number 1, Across/Down)
-        if (sortedNumbers.length > 0) {
-            const firstWordNumber = sortedNumbers[0]; // Get the smallest number available
-            this.selectWordFromClue(firstWordNumber, 'across'); // Try Across first
-
-            // If Across wasn't available or already completed for this number, try Down
-            if (this.wordDirectionSelect.value === '' && this.clues.down.some(clue => clue.number === firstWordNumber && !this.completedWords.has(`down-${firstWordNumber}`))) {
-                 this.selectWordFromClue(firstWordNumber, 'down');
-            }
-        }
+        // Automatically select the first unsolved word
+        this._selectNextUnsolvedWord();
     }
 
     highlightWordInGrid(number, direction) {
@@ -1432,14 +1424,10 @@ class AdvancedCrosswordGame {
         // Check if game is complete
         if (this.completedWords.size === this.clues.across.length + this.clues.down.length) {
             setTimeout(() => this.completeGame(), 500);
+        } else {
+            // Select the next unsolved word
+            this._selectNextUnsolvedWord();
         }
-
-        // Clear selections
-        this.wordNumberSelect.value = '';
-        this.wordDirectionSelect.innerHTML = '<option value="">선택</option>';
-        document.querySelectorAll('.crossword-cell').forEach(cell => {
-            cell.classList.remove('highlighted');
-        });
     }
 
     handleIncorrectAnswer(number, direction, word) {
@@ -1451,6 +1439,28 @@ class AdvancedCrosswordGame {
             cell.classList.add('error');
             setTimeout(() => cell.classList.remove('error'), 300);
         });
+    }
+
+    _selectNextUnsolvedWord() {
+        const allNumbers = new Set();
+        this.clues.across.forEach(clue => allNumbers.add(clue.number));
+        this.clues.down.forEach(clue => allNumbers.add(clue.number));
+        const sortedNumbers = Array.from(allNumbers).sort((a, b) => a - b);
+
+        for (const number of sortedNumbers) {
+            // Try 'across' first
+            const acrossKey = `across-${number}`;
+            if (this.clues.across.some(c => c.number === number) && !this.completedWords.has(acrossKey)) {
+                this.selectWordFromClue(number, 'across');
+                return; // Found the next word, exit
+            }
+            // If not across, try 'down'
+            const downKey = `down-${number}`;
+            if (this.clues.down.some(c => c.number === number) && !this.completedWords.has(downKey)) {
+                this.selectWordFromClue(number, 'down');
+                return; // Found the next word, exit
+            }
+        }
     }
 
     fillWordInGrid(number, direction, word) {
@@ -2521,44 +2531,70 @@ class AdvancedCrosswordGame {
     }
 
     // ===== High Score Management =====
-    loadHighScores() {
-        const saved = localStorage.getItem('crossword-highscores');
-        this.highScores = saved ? JSON.parse(saved) : [];
-    }
+    async loadHighScores() {
+        if (!supabaseClient) {
+            this.highScores = [];
+            return;
+        }
+        try {
+            const { data, error } = await supabaseClient
+                .from('high_scores')
+                .select('*')
+                .order('score', { ascending: false })
+                .limit(5);
 
-    saveHighScores() {
-        localStorage.setItem('crossword-highscores', JSON.stringify(this.highScores));
+            if (error) {
+                console.error('❌ 최고 기록 로드 실패:', error);
+                this.highScores = [];
+                return;
+            }
+            this.highScores = data || [];
+            console.log('✅ 최고 기록을 DB에서 로드했습니다.');
+        } catch (error) {
+            console.error('❌ 최고 기록 로드 중 오류:', error);
+            this.highScores = [];
+        }
     }
 
     isHighScore(score) {
-        return this.highScores.length < 10 || score > (this.highScores[this.highScores.length - 1]?.score || 0);
+        // Now, we just check if the new score is greater than the last of the top 5 scores.
+        // Or if there are fewer than 5 scores in the list.
+        return this.highScores.length < 5 || score > (this.highScores[this.highScores.length - 1]?.score || 0);
     }
 
-    addHighScore(name, score) {
-        this.highScores.push({ 
-            name, 
-            score, 
-            difficulty: this.difficulty,
-            language: this.language,
-            gridSize: this.gridSize,
-            date: new Date().toLocaleDateString() 
-        });
-        this.highScores.sort((a, b) => b.score - a.score);
-        this.highScores = this.highScores.slice(0, 10);
-        this.saveHighScores();
-    }
+    async saveHighScore() {
+        if (!supabaseClient) {
+            this.showError('최고 기록을 저장할 수 없습니다 (DB 연결 안됨).', 'error');
+            this.closeModal('nameModal');
+            this.showGameOver(true);
+            return;
+        }
 
-    showNameInput() {
-        this.showModal('nameModal');
-        document.getElementById('playerName').focus();
-    }
-
-    saveHighScore() {
         const name = document.getElementById('playerName').value.trim() || 'Anonymous';
-        this.addHighScore(name, this.score);
-        this.closeModal('nameModal');
-        this.showGameOver(true);
-        this.playSound('click');
+        
+        try {
+            const { error } = await supabaseClient
+                .from('high_scores')
+                .insert([{
+                    name: name,
+                    score: this.score,
+                    difficulty: this.difficulty,
+                    language: this.language,
+                    grid_size: this.gridSize
+                }]);
+
+            if (error) throw error;
+
+            this.showError('최고 기록이 저장되었습니다!', 'success');
+            await this.loadHighScores(); // Reload scores from DB
+        } catch (error) {
+            console.error('❌ 최고 기록 저장 실패:', error);
+            this.showError('최고 기록 저장에 실패했습니다.', 'error');
+        } finally {
+            this.closeModal('nameModal');
+            this.showGameOver(true);
+            this.playSound('click');
+        }
     }
 
     skipNameInput() {
