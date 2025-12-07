@@ -797,15 +797,17 @@ body {
 
 /* ===== High Score Screen ===== */
 .high-score-screen {
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 2rem;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .score-container {
   width: 100%;
   max-width: 600px;
+  margin: auto 0;
 }
 
 .score-card {
@@ -901,15 +903,17 @@ body {
 
 /* ===== Game Over Screen ===== */
 .game-over-screen {
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 2rem;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .game-over-container {
   width: 100%;
   max-width: 500px;
+  margin: auto 0;
 }
 
 .game-over-card {
@@ -1233,11 +1237,14 @@ body {
   .game-over-screen,
   .high-score-screen {
     padding: 1rem;
+    justify-content: flex-start;
   }
 
   .game-over-card,
   .score-card {
     padding: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   .crossword-cell {
@@ -1389,11 +1396,14 @@ body {
   .game-over-screen,
   .high-score-screen {
     padding: 0.5rem;
+    justify-content: flex-start;
   }
 
   .game-over-card,
   .score-card {
     padding: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .crossword-cell {
