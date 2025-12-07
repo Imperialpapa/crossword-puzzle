@@ -2492,23 +2492,31 @@ class AdvancedCrosswordGame {
     showGameOver(isWin) {
         this.hideAllScreens();
         this.gameOverScreen.classList.add('active');
-        
+
         const content = document.getElementById('gameOverContent');
         content.innerHTML = `
-            <h2>${isWin ? '🎉 축하합니다!' : '⏰ 시간 종료'}</h2>
-            <p>최종 점수: <strong>${this.score.toLocaleString()}점</strong></p>
-            <p>완성한 단어: <strong>${this.completedWords.size}/${this.clues.across.length + this.clues.down.length}개</strong></p>
-            <p>완성률: <strong>${Math.round(this.completedWords.size / (this.clues.across.length + this.clues.down.length) * 100)}%</strong></p>
-            <p>난이도: <strong>${this.difficulty}단계</strong></p>
-            <div class="button-group" style="margin-top: 2rem;">
-                <button class="btn btn-primary" onclick="game.startGame()">
+            <div class="game-over-info">
+                <h2>${isWin ? '🎉 축하합니다!' : '⏰ 시간 종료'}</h2>
+                <p>최종 점수: <strong>${this.score.toLocaleString()}점</strong></p>
+                <p>완성한 단어: <strong>${this.completedWords.size}/${this.clues.across.length + this.clues.down.length}개</strong></p>
+                <p>완성률: <strong>${Math.round(this.completedWords.size / (this.clues.across.length + this.clues.down.length) * 100)}%</strong></p>
+                <p>난이도: <strong>${this.difficulty}단계</strong></p>
+            </div>
+            <div class="game-over-actions">
+                <button class="btn btn-primary slide-in-left" onclick="game.startGame()">
                     <i class="fas fa-redo"></i> 다시 하기
                 </button>
-                <button class="btn btn-secondary" onclick="game.showStartScreen()">
+                <button class="btn btn-secondary slide-in-right" onclick="game.showStartScreen()">
                     <i class="fas fa-home"></i> 메뉴로
                 </button>
             </div>
         `;
+
+        // Trigger animations after a short delay
+        setTimeout(() => {
+            const buttons = content.querySelectorAll('.slide-in-left, .slide-in-right');
+            buttons.forEach(btn => btn.classList.add('visible'));
+        }, 100);
     }
 
     showHelp() {
