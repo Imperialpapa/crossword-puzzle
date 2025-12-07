@@ -612,11 +612,11 @@ body {
 .input-panel {
   background: var(--panel-bg);
   color: var(--panel-text);
-  padding: 0.75rem 1.5rem;
-  padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); /* 작업 표시줄 대응 */
+  padding: 0.5rem 1.5rem; /* Reduced vertical padding */
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 1.5rem;
+  gap: 1rem; /* Reduced gap */
   align-items: center;
   box-shadow: 0 -4px 20px var(--shadow);
   border-top: 1px solid var(--border-color);
@@ -624,14 +624,14 @@ body {
   position: sticky;
   bottom: 0;
   z-index: 50;
-  min-height: 60px;
-  margin-bottom: 0; /* 작업 표시줄과 겹치지 않도록 */
+  min-height: 50px; /* Reduced min-height */
+  margin-bottom: 0;
 }
 
 .panel-left, .panel-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem; /* Reduced gap */
   white-space: nowrap;
 }
 
@@ -647,10 +647,10 @@ body {
 }
 
 .timer {
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* Reduced font size */
   font-weight: 700;
   color: #4ade80;
-  min-width: 80px;
+  min-width: 70px; /* Reduced min-width */
 }
 
 .timer.warning {
@@ -666,7 +666,7 @@ body {
 /* Compact Input Controls - Single Line */
 .input-controls-compact {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem; /* Reduced gap */
   align-items: center;
   width: 100%;
   position: relative;
@@ -676,11 +676,11 @@ body {
   background: var(--bg-secondary);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.6rem; /* Reduced padding */
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* Reduced font size */
   font-weight: 500;
-  min-width: 80px;
+  min-width: 70px; /* Reduced min-width */
   cursor: pointer;
   transition: var(--transition);
 }
@@ -701,14 +701,14 @@ body {
   background: rgba(102, 126, 234, 0.1);
   border: 1px solid rgba(102, 126, 234, 0.3);
   border-radius: 6px;
-  padding: 0.5rem 1rem;
-  min-width: 200px;
-  max-width: 500px;
+  padding: 0.4rem 0.8rem; /* Reduced padding */
+  min-width: 150px; /* Reduced min-width */
+  max-width: 400px;
   overflow: hidden;
 }
 
 .current-hint-display .hint-text {
-  font-size: 0.85rem;
+  font-size: 0.8rem; /* Reduced font size */
   color: var(--panel-text);
   opacity: 0.9;
   white-space: nowrap;
@@ -718,16 +718,16 @@ body {
 }
 
 .word-input-compact {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem; /* Reduced padding */
   border: 2px solid var(--border-color);
   border-radius: 6px;
   background: var(--bg-secondary);
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.9rem; /* Reduced font size */
   font-weight: 500;
-  min-width: 150px;
-  max-width: 200px;
+  min-width: 120px; /* Reduced min-width */
+  max-width: 180px;
   transition: var(--transition);
   text-transform: uppercase;
 }
@@ -740,9 +740,9 @@ body {
 }
 
 .btn-compact {
-  padding: 0.5rem 1rem !important;
+  padding: 0.4rem 0.8rem !important; /* Reduced padding */
   min-width: auto !important;
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* Reduced font size */
   height: auto;
 }
 
@@ -780,17 +780,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.1rem; /* Reduced gap */
 }
 
 .score {
-  font-size: 1.8rem;
+  font-size: 1.5rem; /* Reduced font size */
   font-weight: 700;
   color: #fbbf24;
 }
 
 .progress-info {
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* Reduced font size */
   color: var(--panel-text);
   opacity: 0.8;
 }
