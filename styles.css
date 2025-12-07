@@ -800,6 +800,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  overflow-y: auto;
 }
 
 .score-container {
@@ -903,6 +904,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  overflow-y: auto;
 }
 
 .game-over-container {
@@ -1228,6 +1230,16 @@ body {
     font-size: 0.9rem;
   }
 
+  .game-over-screen,
+  .high-score-screen {
+    padding: 1rem;
+  }
+
+  .game-over-card,
+  .score-card {
+    padding: 1.5rem;
+  }
+
   .crossword-cell {
     width: 30px;
     height: 30px;
@@ -1372,6 +1384,16 @@ body {
   .btn {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
+  }
+
+  .game-over-screen,
+  .high-score-screen {
+    padding: 0.5rem;
+  }
+
+  .game-over-card,
+  .score-card {
+    padding: 1rem;
   }
 
   .crossword-cell {
