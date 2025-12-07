@@ -929,7 +929,7 @@ body {
 }
 
 .game-over-info {
-  flex: 1;
+  flex: 0 1 auto;
 }
 
 .game-over-actions {

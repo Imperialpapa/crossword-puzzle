@@ -2490,10 +2490,14 @@ class AdvancedCrosswordGame {
     }
 
     showGameOver(isWin) {
+        console.log('[DEBUG] showGameOver called, isWin:', isWin);
         this.hideAllScreens();
         this.gameOverScreen.classList.add('active');
+        console.log('[DEBUG] Game over screen set to active');
 
         const content = document.getElementById('gameOverContent');
+        console.log('[DEBUG] gameOverContent element:', content);
+
         content.innerHTML = `
             <div class="game-over-info">
                 <h2>${isWin ? '🎉 축하합니다!' : '⏰ 시간 종료'}</h2>
@@ -2503,19 +2507,25 @@ class AdvancedCrosswordGame {
                 <p>난이도: <strong>${this.difficulty}단계</strong></p>
             </div>
             <div class="game-over-actions">
-                <button class="btn btn-primary slide-in-left" onclick="game.startGame()">
+                <button class="btn btn-primary slide-in-left visible" onclick="game.startGame()">
                     <i class="fas fa-redo"></i> 다시 하기
                 </button>
-                <button class="btn btn-secondary slide-in-right" onclick="game.showStartScreen()">
+                <button class="btn btn-secondary slide-in-right visible" onclick="game.showStartScreen()">
                     <i class="fas fa-home"></i> 메뉴로
                 </button>
             </div>
         `;
 
+        console.log('[DEBUG] Content HTML set. Buttons:', content.querySelectorAll('button').length);
+
         // Trigger animations after a short delay
         setTimeout(() => {
             const buttons = content.querySelectorAll('.slide-in-left, .slide-in-right');
-            buttons.forEach(btn => btn.classList.add('visible'));
+            console.log('[DEBUG] Adding visible class to', buttons.length, 'buttons');
+            buttons.forEach(btn => {
+                btn.classList.add('visible');
+                console.log('[DEBUG] Button classes:', btn.className);
+            });
         }, 100);
     }
 
