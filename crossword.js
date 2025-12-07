@@ -1202,7 +1202,7 @@ class AdvancedCrosswordGame {
         }
         
         // Auto-select if only one option
-        const options = this.wordDirectionSelect.querySelectorAll('option[value!=""]');
+        const options = this.wordDirectionSelect.querySelectorAll('option:not([value=""])');
         if (options.length === 1) {
             this.wordDirectionSelect.value = options[0].value;
             this.onDirectionChange();
