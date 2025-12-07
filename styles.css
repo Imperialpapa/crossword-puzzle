@@ -1147,28 +1147,87 @@ body {
   .game-screen {
     height: calc(100vh - 60px);
   }
-  
+
   .header .container {
     padding: 0.75rem 1rem;
   }
-  
+
   .logo h1 {
     font-size: 1.5rem;
   }
-  
-  .welcome-card {
-    padding: 2rem;
+
+  .start-screen {
+    padding: 1rem;
   }
-  
+
+  .welcome-card {
+    padding: 1.5rem;
+  }
+
   .welcome-card h2 {
     font-size: 1.8rem;
   }
-  
-  .settings-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+
+  .settings-container {
+    margin-bottom: 1.5rem;
   }
-  
+
+  .settings-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .setting-group label {
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+  }
+
+  .select-modern {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .difficulty-slider .slider {
+    height: 6px;
+  }
+
+  .slider-value {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    top: -30px;
+  }
+
+  .word-db-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .word-db-controls button {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .word-count {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .button-group {
+    gap: 0.75rem;
+  }
+
+  .btn-large {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
   .crossword-cell {
     width: 30px;
     height: 30px;
@@ -1255,16 +1314,66 @@ body {
   .game-screen {
     height: calc(100vh - 50px);
   }
-  
+
   .game-content {
     padding: 0.5rem;
     gap: 0.5rem;
   }
-  
-  .welcome-card {
-    padding: 1.5rem;
+
+  .start-screen {
+    padding: 0.5rem;
   }
-  
+
+  .welcome-card {
+    padding: 1rem;
+  }
+
+  .settings-container {
+    margin-bottom: 1rem;
+  }
+
+  .settings-row {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .setting-group label {
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  .select-modern {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .slider-value {
+    font-size: 0.75rem;
+  }
+
+  .word-db-controls button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .word-count {
+    font-size: 0.75rem;
+  }
+
+  .button-group {
+    gap: 0.5rem;
+  }
+
+  .btn-large {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
   .crossword-cell {
     width: 25px;
     height: 25px;
