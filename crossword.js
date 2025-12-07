@@ -1409,25 +1409,27 @@ class AdvancedCrosswordGame {
         // Mark as completed
         this.markWordAsCompleted(number, direction);
 
-        // Reset timer and notify user
-        this.timer = this.gameTime;
-        this.updateTimer();
-        this.showError('정답! 타이머가 초기화됩니다.', 'success');
-
+        // Play sound
+        this.playSound('correct');
+        
         // Update UI
         this.populateNumberOptions();
         this.updateProgress();
 
-        // Play sound
-        this.playSound('correct');
-
-        // Check if game is complete
+        // Check for game completion BEFORE resetting timer or selecting next word
         if (this.completedWords.size === this.clues.across.length + this.clues.down.length) {
+            this.showError('🎉 All words solved!', 'success');
             setTimeout(() => this.completeGame(), 500);
-        } else {
-            // Select the next unsolved word
-            this._selectNextUnsolvedWord();
+            return; // Exit to prevent timer reset on the final word
         }
+
+        // Reset timer and notify user (only if game is not complete)
+        this.timer = this.gameTime;
+        this.updateTimer();
+        this.showError('정답! 타이머가 초기화됩니다.', 'success');
+
+        // Select the next unsolved word
+        this._selectNextUnsolvedWord();
     }
 
     handleIncorrectAnswer(number, direction, word) {
