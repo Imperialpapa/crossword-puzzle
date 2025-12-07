@@ -2295,14 +2295,19 @@ class AdvancedCrosswordGame {
         
         const finalScore = this.calculateFinalScore();
         this.score = finalScore;
+        console.log(`[DEBUG] Game complete! Final score: ${finalScore}`);
         
         this.showCelebration();
         this.playSound('complete');
         
         setTimeout(() => {
+            console.log(`[DEBUG] Post-celebration: Checking high score. Current high scores loaded: ${this.highScores.length}`);
+            console.log(`[DEBUG] Is ${finalScore} a high score? ${this.isHighScore(finalScore)}`);
             if (this.isHighScore(finalScore)) {
+                console.log('[DEBUG] Showing name input.');
                 this.showNameInput();
             } else {
+                console.log('[DEBUG] Showing game over screen.');
                 this.showGameOver(true);
             }
         }, 3000);
