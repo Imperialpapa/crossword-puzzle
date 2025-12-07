@@ -2622,6 +2622,22 @@ class AdvancedCrosswordGame {
         }
     }
 
+    showNameInput() {
+        console.log('[DEBUG] showNameInput called');
+        // Clear previous input
+        const playerNameInput = document.getElementById('playerName');
+        if (playerNameInput) {
+            playerNameInput.value = '';
+        }
+        this.showModal('nameModal');
+        // Focus on input
+        setTimeout(() => {
+            if (playerNameInput) {
+                playerNameInput.focus();
+            }
+        }, 100);
+    }
+
     skipNameInput() {
         this.closeModal('nameModal');
         this.showGameOver(true);
