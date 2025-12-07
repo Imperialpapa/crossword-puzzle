@@ -534,10 +534,12 @@ class AdvancedCrosswordGame {
             // Game Settings
             this.gridSize = 15;
             this.language = 'english';
-            this.difficulty = 3; 
+            this.difficulty = 3;
             this.gameTime = 180; // 3 minutes default
             this.timer = this.gameTime;
             this.score = 0;
+            this.sessionScore = 0; // Cumulative score across games in same session
+            this.isNewSession = true; // Track if starting fresh session
             this.gameActive = false;
             this.isPaused = false;
             this.soundEnabled = true;
@@ -1620,7 +1622,17 @@ class AdvancedCrosswordGame {
 
         this.wordPositions.clear();
         this.completedWords.clear();
-        this.score = 0;
+
+        // Only reset score if starting a new session
+        if (this.isNewSession) {
+            this.score = 0;
+            this.sessionScore = 0;
+            this.isNewSession = false; // Now in active session
+        } else {
+            // Continue session: keep cumulative score, reset current game score
+            this.score = this.sessionScore;
+        }
+
         this.timer = this.gameTime;
         this.updateScore();
         this.updateProgress();
@@ -2292,14 +2304,15 @@ class AdvancedCrosswordGame {
     completeGame() {
         this.gameActive = false;
         clearInterval(this.timerInterval);
-        
+
         const finalScore = this.calculateFinalScore();
         this.score = finalScore;
-        console.log(`[DEBUG] Game complete! Final score: ${finalScore}`);
-        
+        this.sessionScore = finalScore; // Save cumulative score for next game
+        console.log(`[DEBUG] Game complete! Final score: ${finalScore}, Session score: ${this.sessionScore}`);
+
         this.showCelebration();
         this.playSound('complete');
-        
+
         setTimeout(() => {
             console.log(`[DEBUG] Post-celebration: Checking high score. Current high scores loaded: ${this.highScores.length}`);
             console.log(`[DEBUG] Is ${finalScore} a high score? ${this.isHighScore(finalScore)}`);
@@ -2317,10 +2330,19 @@ class AdvancedCrosswordGame {
         this.gameActive = false;
         clearInterval(this.timerInterval);
         this.closeAllModals();
-        
+
         const finalScore = this.calculateFinalScore();
         this.score = finalScore;
-        
+
+        if (completed) {
+            // Game completed successfully: save session score for continuation
+            this.sessionScore = finalScore;
+        } else {
+            // Game failed (time out): end session, reset on next game
+            this.isNewSession = true;
+            this.sessionScore = 0;
+        }
+
         if (completed && this.isHighScore(finalScore)) {
             this.showNameInput();
         } else {
@@ -2481,6 +2503,13 @@ class AdvancedCrosswordGame {
     showStartScreen() {
         this.hideAllScreens();
         this.startScreen.classList.add('active');
+
+        // End session when returning to menu
+        this.isNewSession = true;
+        this.sessionScore = 0;
+        this.score = 0;
+        this.gameActive = false;
+        clearInterval(this.timerInterval);
     }
 
     showGameScreen() {
