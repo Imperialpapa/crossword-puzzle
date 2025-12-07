@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
@@ -155,12 +158,12 @@
                 </div>
             </div>
 
-            <!-- Bottom Fixed Input Panel -->
+            <!-- Bottom Fixed Input Panel - Optimized Single Line -->
             <div class="input-panel">
                 <div class="panel-left">
                     <div class="timer-section">
                         <i class="fas fa-clock"></i>
-                        <span class="timer" id="gameTimer">03:00</span>
+                        <span class="timer" id="timerDisplay">03:00</span>
                         <button class="btn btn-sm" id="pauseBtn">
                             <i class="fas fa-pause"></i>
                         </button>
@@ -168,33 +171,31 @@
                 </div>
 
                 <div class="panel-center">
-                    <div class="input-controls">
-                        <div class="input-row">
-                            <div class="input-group">
-                                <label>번호</label>
-                                <select id="wordNumber" class="input-select">
-                                    <option value="">선택</option>
-                                </select>
-                            </div>
-                            
-                            <div class="input-group">
-                                <label>방향</label>
-                                <select id="wordDirection" class="input-select">
-                                    <option value="">선택</option>
-                                    <option value="across">가로</option>
-                                    <option value="down">세로</option>
-                                </select>
-                            </div>
+                    <div class="input-controls-compact">
+                        <select id="wordNumber" class="input-select-compact" title="번호">
+                            <option value="">번호</option>
+                        </select>
+
+                        <select id="wordDirection" class="input-select-compact" title="방향">
+                            <option value="">방향</option>
+                            <option value="across">가로</option>
+                            <option value="down">세로</option>
+                        </select>
+
+                        <div class="current-hint-display" id="currentHintDisplay">
+                            <span class="hint-text">힌트가 여기에 표시됩니다</span>
                         </div>
-                        
-                        <div class="word-input-container">
-                            <input type="text" id="wordInput" placeholder="단어를 입력하세요..." class="word-input">
-                            <button class="btn btn-primary" id="submitWord">
-                                <i class="fas fa-check"></i>
-                                입력
-                            </button>
-                        </div>
-                        
+
+                        <input type="text" id="wordInput" placeholder="단어 입력..." class="word-input-compact">
+
+                        <button class="btn btn-secondary btn-compact" id="showAnswerBtn" title="정답 보기">
+                            <i class="fas fa-lightbulb"></i>
+                        </button>
+
+                        <button class="btn btn-primary btn-compact" id="submitWord">
+                            <i class="fas fa-check"></i>
+                        </button>
+
                         <!-- Auto-complete suggestions for difficulty ≤3 -->
                         <div class="autocomplete-suggestions" id="autocompleteSuggestions"></div>
                     </div>
@@ -323,6 +324,9 @@
 
     <!-- Celebration Canvas for 3D Effects -->
     <canvas id="celebrationCanvas"></canvas>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

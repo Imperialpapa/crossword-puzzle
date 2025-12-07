@@ -3,9 +3,21 @@
     "allow": [
       "Bash(python:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(node -c:*)",
+      "Bash(node replace_method.js:*)",
+      "Bash(node replace_hardcoded.js:*)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "D:\\",
+      "D:\\dev\\puzzle_gemini"
+    ]
   }
 }
