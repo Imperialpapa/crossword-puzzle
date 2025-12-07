@@ -1090,6 +1090,13 @@ body {
   .game-screen {
     height: calc(100vh - 60px); /* 모바일에서 헤더 높이 조정 */
   }
+
+  .game-over-screen,
+  .high-score-screen,
+  .start-screen {
+    height: auto;
+    min-height: calc(100vh - 60px);
+  }
   
   .game-content {
     grid-template-columns: 1fr;
@@ -1152,6 +1159,13 @@ body {
 @media (max-width: 768px) {
   .game-screen {
     height: calc(100vh - 60px);
+  }
+
+  .game-over-screen,
+  .high-score-screen,
+  .start-screen {
+    height: auto;
+    min-height: calc(100vh - 60px);
   }
 
   .header .container {
@@ -1332,6 +1346,13 @@ body {
 @media (max-width: 480px) {
   .game-screen {
     height: calc(100vh - 50px);
+  }
+
+  .game-over-screen,
+  .high-score-screen,
+  .start-screen {
+    height: auto;
+    min-height: calc(100vh - 50px);
   }
 
   .game-content {
