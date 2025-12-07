@@ -1114,7 +1114,12 @@ class AdvancedCrosswordGame {
         document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
         document.getElementById('soundToggle').addEventListener('click', () => this.toggleSound());
         document.getElementById('helpBtn').addEventListener('click', () => this.showHelp());
-        
+
+        // Start screen controls (duplicates for bottom buttons)
+        document.getElementById('themeToggleStart').addEventListener('click', () => this.toggleTheme());
+        document.getElementById('soundToggleStart').addEventListener('click', () => this.toggleSound());
+        document.getElementById('helpBtnStart').addEventListener('click', () => this.showHelp());
+
         // Modal controls
         document.getElementById('saveScoreBtn').addEventListener('click', () => this.saveHighScore());
         document.getElementById('skipNameBtn').addEventListener('click', () => this.skipNameInput());
@@ -2365,14 +2370,18 @@ class AdvancedCrosswordGame {
     }
 
     updateThemeIcon() {
-        const icon = document.querySelector('#themeToggle i');
-        icon.className = this.theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        const themeClass = this.theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        document.querySelectorAll('#themeToggle i, #themeToggleStart i').forEach(icon => {
+            icon.className = themeClass;
+        });
     }
 
     toggleSound() {
         this.soundEnabled = !this.soundEnabled;
-        const icon = document.querySelector('#soundToggle i');
-        icon.className = this.soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+        const soundClass = this.soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+        document.querySelectorAll('#soundToggle i, #soundToggleStart i').forEach(icon => {
+            icon.className = soundClass;
+        });
         localStorage.setItem('crossword-sound', this.soundEnabled);
         this.playSound('click');
     }
