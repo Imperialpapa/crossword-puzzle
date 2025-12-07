@@ -1690,19 +1690,32 @@ class AdvancedCrosswordGame {
     selectWordsForCrossword() {
         this.words = [];
         const langDatabase = this.wordDatabase.get(this.language);
+
+        console.log(`[단어 선택] 언어: ${this.language}, 난이도: ${this.difficulty}`);
+        console.log(`[단어 선택] wordDatabase 언어 목록:`, Array.from(this.wordDatabase.keys()));
+
         if (!langDatabase) {
             console.error('단어 데이터베이스를 찾을 수 없음');
+            this.showError(`${this.language} 언어의 단어 데이터베이스를 찾을 수 없습니다.`);
             return;
         }
 
         // 1. 선택된 난이도까지의 모든 단어를 후보 목록에 추가
         let candidateWords = [];
         const maxDifficulty = Math.min(this.difficulty, 10);
+
+        console.log(`[단어 선택] 난이도 1~${maxDifficulty} 범위에서 단어 검색 중...`);
         for (let diff = 1; diff <= maxDifficulty; diff++) {
             if (langDatabase.has(diff)) {
-                candidateWords.push(...langDatabase.get(diff));
+                const wordsAtDiff = langDatabase.get(diff);
+                console.log(`[단어 선택] 난이도 ${diff}: ${wordsAtDiff.length}개 단어 발견`);
+                candidateWords.push(...wordsAtDiff);
+            } else {
+                console.log(`[단어 선택] 난이도 ${diff}: 단어 없음`);
             }
         }
+
+        console.log(`[단어 선택] 총 후보 단어: ${candidateWords.length}개`);
         
         // 2. 만약 선택된 난이도에서 단어를 찾지 못했고, 선택된 난이도가 3보다 낮다면, 난이도 3까지 확장하여 다시 검색합니다.
         if (candidateWords.length === 0 && maxDifficulty < 3) {
