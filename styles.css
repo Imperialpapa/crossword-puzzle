@@ -364,9 +364,10 @@ body {
 
 .game-content {
   flex: 1;
-  display: flex;
+  display: grid;
   justify-content: center;
-  /* gap: 1.5rem; Removed to make grid and clues attach right next to each other */
+  grid-template-columns: max-content 380px;
+  gap: 1.5rem;
   padding: 1.5rem;
   overflow: hidden;
   min-height: 0;
@@ -381,8 +382,6 @@ body {
   min-height: 0; /* Changed from fit-content */
   min-width: 0; /* Added for flexbox shrinking */
   height: 100%;
-  max-width: 800px; /* Constrain grid section width */
-  flex: 1 1 auto; /* Allow shrinking but not aggressive growing */
 }
 
 .grid-container {
