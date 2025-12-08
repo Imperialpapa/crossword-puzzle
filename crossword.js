@@ -2831,15 +2831,8 @@ class AdvancedCrosswordGame {
         this.playSound('complete');
 
         setTimeout(() => {
-            console.log(`[DEBUG] Post-celebration: Checking high score. Current high scores loaded: ${this.highScores.length}`);
-            console.log(`[DEBUG] Is ${finalScore} a high score? ${this.isHighScore(finalScore)}`);
-            if (this.isHighScore(finalScore)) {
-                console.log('[DEBUG] Showing name input.');
-                this.showNameInput();
-            } else {
-                console.log('[DEBUG] Showing game over screen.');
-                this.showGameOver(true);
-            }
+            console.log(`[DEBUG] Post-celebration: Showing game over screen. Session score: ${this.sessionScore}`);
+            this.showGameOver(true);
         }, 3000);
     }
 
@@ -2860,11 +2853,8 @@ class AdvancedCrosswordGame {
             this.sessionScore = 0;
         }
 
-        if (completed && this.isHighScore(finalScore)) {
-            this.showNameInput();
-        } else {
-            this.showGameOver(completed);
-        }
+        // Always show game over screen; high score check happens when returning to menu
+        this.showGameOver(completed);
     }
 
     calculateFinalScore() {
@@ -3018,6 +3008,14 @@ class AdvancedCrosswordGame {
 
     // ===== Screen Management =====
     showStartScreen() {
+        // Check for high score before ending session
+        if (this.sessionScore > 0 && this.isHighScore(this.sessionScore)) {
+            console.log(`[DEBUG] Session ending with high score: ${this.sessionScore}`);
+            this.score = this.sessionScore; // Set score for saving
+            this.showNameInput();
+            return; // Name input modal will handle navigation after save
+        }
+
         this.hideAllScreens();
         this.startScreen.classList.add('active');
 
@@ -3169,8 +3167,20 @@ class AdvancedCrosswordGame {
             this.showError('최고 기록 저장에 실패했습니다.', 'error');
         } finally {
             this.closeModal('nameModal');
-            this.showGameOver(true);
             this.playSound('click');
+
+            // Reset session and return to menu
+            this.sessionScore = 0;
+            this.isNewSession = true;
+
+            // Use setTimeout to ensure modal closes before showing start screen
+            setTimeout(() => {
+                this.hideAllScreens();
+                this.startScreen.classList.add('active');
+                this.score = 0;
+                this.gameActive = false;
+                clearInterval(this.timerInterval);
+            }, 100);
         }
     }
 
@@ -3192,8 +3202,20 @@ class AdvancedCrosswordGame {
 
     skipNameInput() {
         this.closeModal('nameModal');
-        this.showGameOver(true);
         this.playSound('click');
+
+        // Reset session and return to menu
+        this.sessionScore = 0;
+        this.isNewSession = true;
+
+        // Use setTimeout to ensure modal closes before showing start screen
+        setTimeout(() => {
+            this.hideAllScreens();
+            this.startScreen.classList.add('active');
+            this.score = 0;
+            this.gameActive = false;
+            clearInterval(this.timerInterval);
+        }, 100);
     }
 
     renderHighScores() {
