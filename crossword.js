@@ -2259,14 +2259,43 @@ class AdvancedCrosswordGame {
         const centerCol = Math.floor(this.gridSize / 2);
 
         // Place first word horizontally in center
+        // 첫 단어는 중간 길이를 선택하면 교차 기회가 많아짐
         if (this.words.length > 0) {
+            // 중간 길이의 단어 찾기 (4-8자 사이 우선, 없으면 첫 단어 사용)
+            let firstWordIndex = 0;
+            for (let i = 0; i < this.words.length; i++) {
+                const len = this.words[i].word.length;
+                if (len >= 4 && len <= 8) {
+                    firstWordIndex = i;
+                    break;
+                }
+            }
+
+            // 선택된 단어를 첫 번째 위치와 교환
+            if (firstWordIndex !== 0) {
+                [this.words[0], this.words[firstWordIndex]] = [this.words[firstWordIndex], this.words[0]];
+            }
+
             const startCol = Math.max(0, centerCol - Math.floor(this.words[0].word.length / 2));
             this.placeWord(this.words[0], centerRow, startCol, 'across');
+            console.log(`✅ 첫 단어 배치: ${this.words[0].word} (길이: ${this.words[0].word.length})`);
         }
 
         // Place remaining words
         for (let i = 1; i < this.words.length; i++) {
-            const placed = this.findPlacementForWord(this.words[i]);
+            // 먼저 교차 배치 시도
+            let placed = this.findPlacementForWord(this.words[i]);
+
+            // 교차 배치 실패 시 랜덤 배치 시도
+            if (!placed) {
+                console.log(`교차 배치 실패, 랜덤 배치 시도: ${this.words[i].word}`);
+                placed = this.placeWordRandomly(this.words[i]);
+                if (placed) {
+                    console.log(`✅ 랜덤 배치 성공: ${this.words[i].word}`);
+                } else {
+                    console.log(`❌ 랜덤 배치도 실패: ${this.words[i].word}`);
+                }
+            }
 
             // 배치에 실패한 단어는 words 배열에서 제거하지 않지만 clues에 추가하지 않음
             // generateClues 메서드에서 row, col이 undefined인 단어는 자동으로 제외됨
@@ -2429,25 +2458,30 @@ class AdvancedCrosswordGame {
 
     placeWordRandomly(wordObj) {
         const word = wordObj.word.toUpperCase();
-        const direction = Math.random() < 0.5 ? 'across' : 'down';
 
-        const maxRow = direction === 'across' ? this.gridSize - 1 : this.gridSize - word.length;
-        const maxCol = direction === 'across' ? this.gridSize - word.length : this.gridSize - 1;
+        // 가로/세로 양쪽 방향 모두 시도
+        const directions = ['across', 'down'];
 
-        if (maxRow >= 0 && maxCol >= 0) {
-            // Try to find an empty area
-            for (let attempts = 0; attempts < 50; attempts++) {
-                const row = Math.floor(Math.random() * (maxRow + 1));
-                const col = Math.floor(Math.random() * (maxCol + 1));
+        for (const direction of directions) {
+            const maxRow = direction === 'across' ? this.gridSize - 1 : this.gridSize - word.length;
+            const maxCol = direction === 'across' ? this.gridSize - word.length : this.gridSize - 1;
 
-                if (this.canPlaceWordAt(word, row, col, direction)) {
-                    const success = this.placeWord(wordObj, row, col, direction);
-                    if (success) {
-                        return true;
+            if (maxRow >= 0 && maxCol >= 0) {
+                // 시도 횟수를 100번으로 증가 (50 → 100)
+                for (let attempts = 0; attempts < 100; attempts++) {
+                    const row = Math.floor(Math.random() * (maxRow + 1));
+                    const col = Math.floor(Math.random() * (maxCol + 1));
+
+                    if (this.canPlaceWordAt(word, row, col, direction)) {
+                        const success = this.placeWord(wordObj, row, col, direction);
+                        if (success) {
+                            return true;
+                        }
                     }
                 }
             }
         }
+
         return false; // 배치 실패
     }
 
