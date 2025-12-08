@@ -1213,18 +1213,31 @@ class AdvancedCrosswordGame {
         const WORDS_TO_ADD_PER_CLICK = 10;
         let addedCount = 0;
         const wordsToAddQueue = [];
-        const existingWords = new Set();
 
         // 현재 선택된 언어 가져오기
         const currentLang = this.language;
         console.log(`📝 현재 선택된 언어: ${currentLang}`);
 
-        // 현재 DB에 있는 해당 언어의 모든 단어를 Set으로 가져옵니다.
-        const langDB = this.wordDatabase.get(currentLang);
-        if (langDB) {
-            for (const words of langDB.values()) {
-                words.forEach(wordObj => existingWords.add(wordObj.word));
+        // 현재 DB에 있는 해당 언어의 모든 단어를 Supabase에서 직접 가져옵니다.
+        let existingWords = new Set();
+        try {
+            const { data, error } = await supabaseClient
+                .from('crossword_words')
+                .select('word')
+                .eq('language', currentLang);
+            if (error) throw error;
+            existingWords = new Set(data.map(row => row.word));
+            console.log(`📊 Supabase DB에서 ${currentLang} 단어 ${existingWords.size}개 로드 완료`);
+        } catch (error) {
+            console.error('❌ Supabase에서 기존 단어 로드 실패:', error);
+            // 에러 발생 시 메모리 DB에서 폴백
+            const langDB = this.wordDatabase.get(currentLang);
+            if (langDB) {
+                for (const words of langDB.values()) {
+                    words.forEach(wordObj => existingWords.add(wordObj.word));
+                }
             }
+            console.log(`📊 메모리 DB에서 ${currentLang} 단어 ${existingWords.size}개 로드 (폴백)`);
         }
 
         // 헬퍼 함수: 풀에서 단어를 가져와 큐에 추가
