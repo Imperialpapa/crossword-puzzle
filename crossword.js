@@ -534,7 +534,37 @@ const POOL_TIER_1_KOREAN = [
     { word: '전통', difficulty: 5, hints: ['옛날부터 이어져 내려오는 풍습', '세대를 거쳐 전해지는 문화'] },
     { word: '희망', difficulty: 4, hints: ['앞일에 대한 기대와 바람', '좋은 결과를 기대하는 마음'] },
     { word: '우정', difficulty: 4, hints: ['친구 사이의 정', '서로 아끼고 돕는 친구 관계'] },
-    { word: '노력', difficulty: 4, hints: ['목표를 이루기 위해 힘쓰는 것', '애를 쓰며 힘을 다하는 행위'] }
+    { word: '노력', difficulty: 4, hints: ['목표를 이루기 위해 힘쓰는 것', '애를 쓰며 힘을 다하는 행위'] },
+    { word: '정치', difficulty: 5, hints: ['국가나 사회를 다스리는 일', '권력을 획득하고 행사하는 활동'] },
+    { word: '국가', difficulty: 4, hints: ['일정한 영토와 국민으로 이루어진 조직', '주권을 가진 정치 단위'] },
+    { word: '민족', difficulty: 5, hints: ['같은 언어와 문화를 공유하는 집단', '혈통과 역사를 함께하는 공동체'] },
+    { word: '언어', difficulty: 4, hints: ['생각과 감정을 전달하는 수단', '말과 글로 표현하는 체계'] },
+    { word: '예술', difficulty: 4, hints: ['아름다움을 표현하는 활동', '창조적인 표현의 총체'] },
+    { word: '종교', difficulty: 5, hints: ['신앙과 의례의 체계', '초월적 존재를 믿는 신념'] },
+    { word: '도덕', difficulty: 5, hints: ['옳고 그름을 판단하는 기준', '인간이 지켜야 할 행동 규범'] },
+    { word: '법률', difficulty: 6, hints: ['국가가 정한 규칙', '사회 질서를 유지하는 규범'] },
+    { word: '권리', difficulty: 5, hints: ['정당하게 주장할 수 있는 자격', '법적으로 보장된 이익'] },
+    { word: '의무', difficulty: 5, hints: ['마땅히 해야 할 일', '책임감 있게 수행해야 하는 것'] },
+    { word: '민주', difficulty: 5, hints: ['국민이 주인이 되는 정치', '다수의 의견을 존중하는 체제'] },
+    { word: '자본', difficulty: 6, hints: ['생산에 투입되는 재화', '이윤을 창출하는 원천'] },
+    { word: '노동', difficulty: 4, hints: ['육체적 정신적으로 일하는 것', '생산 활동에 참여하는 행위'] },
+    { word: '산업', difficulty: 5, hints: ['재화와 서비스를 생산하는 활동', '경제를 구성하는 생산 부문'] },
+    { word: '무역', difficulty: 5, hints: ['국가 간 물품을 사고파는 것', '국제적 상거래 활동'] },
+    { word: '시장', difficulty: 4, hints: ['물건을 사고파는 곳', '수요와 공급이 만나는 장소'] },
+    { word: '금융', difficulty: 6, hints: ['돈을 빌려주고 받는 활동', '자금의 융통과 관련된 업무'] },
+    { word: '투자', difficulty: 5, hints: ['이익을 얻기 위해 돈을 쓰는 것', '미래 수익을 기대하며 자본을 투입하는 행위'] },
+    { word: '기업', difficulty: 4, hints: ['이윤을 목적으로 하는 조직', '재화나 서비스를 생산하는 단체'] },
+    { word: '경영', difficulty: 5, hints: ['조직을 효율적으로 운영하는 것', '기업의 목표 달성을 위한 활동'] },
+    { word: '혁명', difficulty: 6, hints: ['기존 체제를 뒤엎는 변화', '급격하고 근본적인 전환'] },
+    { word: '전쟁', difficulty: 4, hints: ['국가 간의 무력 충돌', '대규모 군사적 대립'] },
+    { word: '독립', difficulty: 5, hints: ['다른 것에 의존하지 않는 것', '자주적으로 존재하는 상태'] },
+    { word: '통일', difficulty: 5, hints: ['나뉜 것을 하나로 합치는 것', '분열된 상태를 통합하는 과정'] },
+    { word: '협력', difficulty: 4, hints: ['함께 힘을 합치는 것', '공동의 목표를 위해 돕는 행위'] },
+    { word: '경쟁', difficulty: 4, hints: ['서로 이기려고 다투는 것', '더 나은 결과를 위해 겨루는 행위'] },
+    { word: '갈등', difficulty: 5, hints: ['서로 대립하는 상태', '의견이나 이해관계의 충돌'] },
+    { word: '조화', difficulty: 4, hints: ['서로 잘 어울리는 것', '균형 잡힌 상태'] },
+    { word: '균형', difficulty: 5, hints: ['한쪽으로 치우치지 않은 상태', '서로 맞먹는 힘의 분포'] },
+    { word: '안정', difficulty: 4, hints: ['변동 없이 고정된 상태', '흔들리지 않고 편안한 상태'] }
 ];
 
 const POOL_TIER_2_KOREAN = [
@@ -568,7 +598,37 @@ const POOL_TIER_2_KOREAN = [
     { word: '글', difficulty: 2, hints: ['문자로 쓴 것', '생각을 기록한 것'] },
     { word: '색', difficulty: 2, hints: ['눈으로 보는 빛깔', '빨강, 파랑, 노랑 같은 것'] },
     { word: '소리', difficulty: 2, hints: ['귀로 듣는 것', '공기의 진동'] },
-    { word: '빛', difficulty: 2, hints: ['눈으로 볼 수 있게 하는 것', '밝게 비추는 것'] }
+    { word: '빛', difficulty: 2, hints: ['눈으로 볼 수 있게 하는 것', '밝게 비추는 것'] },
+    { word: '손', difficulty: 1, hints: ['팔 끝에 달린 신체 부위', '물건을 잡는 데 쓰는 것'] },
+    { word: '발', difficulty: 1, hints: ['다리 끝에 있는 신체 부위', '걷거나 뛸 때 쓰는 것'] },
+    { word: '머리', difficulty: 1, hints: ['몸의 가장 윗부분', '두뇌가 들어있는 곳'] },
+    { word: '얼굴', difficulty: 2, hints: ['머리 앞쪽 부분', '눈, 코, 입이 있는 곳'] },
+    { word: '입', difficulty: 1, hints: ['음식을 먹는 곳', '말을 하는 기관'] },
+    { word: '코', difficulty: 1, hints: ['냄새를 맡는 기관', '숨을 쉬는 구멍'] },
+    { word: '귀', difficulty: 1, hints: ['소리를 듣는 기관', '양쪽 머리에 있는 것'] },
+    { word: '목', difficulty: 1, hints: ['머리와 몸통을 연결하는 부분', '음식이 지나가는 통로'] },
+    { word: '어깨', difficulty: 2, hints: ['팔과 몸통이 연결되는 부분', '짐을 메는 곳'] },
+    { word: '가슴', difficulty: 2, hints: ['몸의 앞 윗부분', '심장이 있는 곳'] },
+    { word: '배', difficulty: 1, hints: ['몸통의 앞부분', '음식을 소화하는 곳'] },
+    { word: '다리', difficulty: 1, hints: ['걷고 뛰는 신체 부위', '몸을 지탱하는 것'] },
+    { word: '팔', difficulty: 1, hints: ['어깨에서 손까지', '물건을 잡는 신체 부위'] },
+    { word: '문', difficulty: 1, hints: ['드나드는 곳', '방을 구분하는 것'] },
+    { word: '창문', difficulty: 2, hints: ['밖을 내다보는 곳', '빛이 들어오는 구멍'] },
+    { word: '의자', difficulty: 1, hints: ['앉는 데 쓰는 가구', '등받이가 있는 것'] },
+    { word: '책상', difficulty: 2, hints: ['공부하거나 일하는 가구', '책과 물건을 올려놓는 곳'] },
+    { word: '침대', difficulty: 2, hints: ['자는 데 쓰는 가구', '누워서 쉬는 곳'] },
+    { word: '옷', difficulty: 1, hints: ['몸에 입는 것', '추위나 더위를 막는 것'] },
+    { word: '신발', difficulty: 2, hints: ['발에 신는 것', '걸을 때 발을 보호하는 것'] },
+    { word: '모자', difficulty: 2, hints: ['머리에 쓰는 것', '햇빛을 가리는 물건'] },
+    { word: '가방', difficulty: 2, hints: ['물건을 넣어 들고 다니는 것', '책이나 짐을 담는 것'] },
+    { word: '연필', difficulty: 2, hints: ['글씨를 쓰는 도구', '지우개로 지울 수 있는 것'] },
+    { word: '공책', difficulty: 2, hints: ['글을 쓰는 종이를 묶은 것', '학교에서 쓰는 노트'] },
+    { word: '칠판', difficulty: 2, hints: ['학교에서 글씨를 쓰는 판', '분필로 쓰는 것'] },
+    { word: '지우개', difficulty: 3, hints: ['연필 자국을 없애는 도구', '잘못 쓴 것을 지우는 물건'] },
+    { word: '자', difficulty: 1, hints: ['길이를 재는 도구', '직선을 긋는 물건'] },
+    { word: '가위', difficulty: 2, hints: ['종이나 천을 자르는 도구', '두 날이 있는 것'] },
+    { word: '풀', difficulty: 1, hints: ['종이를 붙이는 것', '끈적한 액체'] },
+    { word: '그림', difficulty: 2, hints: ['선과 색으로 그린 것', '보기 좋게 표현한 작품'] }
 ];
 
 const POOL_TIER_3_KOREAN = [
@@ -596,6 +656,8 @@ const POOL_TIER_3_KOREAN = [
 ];
 
 const ONLINE_WORD_LIST_URL = 'https://example.com/your-dynamic-wordlist.json'; // 사용자 정의 온라인 단어 목록 URL을 여기에 입력하세요
+
+// 영어 온라인 단어 목록 (4순위)
 const ONLINE_WORD_LIST_PLACEHOLDER_DATA = [
     // Placeholder for words fetched from an online source (e.g., neologisms, contemporary words)
     // 이 데이터는 실제 온라인 URL에서 가져올 데이터의 예시입니다.
@@ -609,6 +671,31 @@ const ONLINE_WORD_LIST_PLACEHOLDER_DATA = [
     { word: 'WOKE', difficulty: 5, hints: ['Alert to injustice in society, especially racism', 'Aware of current social issues'] },
     { word: 'SIMP', difficulty: 4, hints: ['A man who is overly submissive to a woman', 'Acting in a submissive way to impress someone'] },
     { word: 'CAP', difficulty: 3, hints: ['A lie or exaggeration', 'To not tell the truth (slang)'] }
+];
+
+// 한국어 온라인 단어 목록 (4순위)
+const ONLINE_WORD_LIST_PLACEHOLDER_DATA_KOREAN = [
+    // 현대 한국어 신조어 및 트렌드 단어
+    { word: '먹방', difficulty: 3, hints: ['먹는 방송', '음식을 먹는 모습을 보여주는 콘텐츠'] },
+    { word: '브이로그', difficulty: 4, hints: ['비디오 블로그의 줄임말', '일상을 영상으로 기록하는 것'] },
+    { word: '셀카', difficulty: 3, hints: ['자기 자신을 찍은 사진', '셀프 카메라의 줄임말'] },
+    { word: '댓글', difficulty: 3, hints: ['인터넷에서 다는 의견', '게시물에 대한 반응'] },
+    { word: '구독', difficulty: 3, hints: ['정기적으로 콘텐츠를 받아보는 것', '유튜브에서 채널을 팔로우하는 행위'] },
+    { word: '좋아요', difficulty: 2, hints: ['게시물에 호감을 표시하는 것', 'SNS에서 하트를 누르는 행위'] },
+    { word: '공유', difficulty: 3, hints: ['다른 사람과 함께 나누는 것', '게시물을 퍼뜨리는 행위'] },
+    { word: '해시태그', difficulty: 4, hints: ['# 기호를 붙인 키워드', 'SNS에서 검색을 위해 쓰는 태그'] },
+    { word: '팔로우', difficulty: 3, hints: ['SNS에서 상대를 구독하는 것', '다른 사람의 소식을 받아보는 행위'] },
+    { word: '인플루언서', difficulty: 5, hints: ['영향력 있는 사람', 'SNS에서 많은 팔로워를 가진 사람'] },
+    { word: '쿠키', difficulty: 3, hints: ['웹사이트 방문 기록', '인터넷 사용자 정보를 저장하는 파일'] },
+    { word: '클라우드', difficulty: 4, hints: ['인터넷에 자료를 저장하는 공간', '온라인 저장소 서비스'] },
+    { word: '스트리밍', difficulty: 4, hints: ['실시간으로 영상이나 음악을 재생하는 것', '다운로드 없이 바로 보는 방식'] },
+    { word: '플랫폼', difficulty: 5, hints: ['서비스를 제공하는 기반', '다양한 콘텐츠가 모이는 공간'] },
+    { word: '알고리즘', difficulty: 6, hints: ['문제를 푸는 절차나 방법', '컴퓨터가 작동하는 원리'] },
+    { word: '빅데이터', difficulty: 6, hints: ['매우 큰 규모의 데이터', '방대한 정보의 집합'] },
+    { word: '인공지능', difficulty: 5, hints: ['사람처럼 생각하는 기계', '컴퓨터가 학습하고 판단하는 기술'] },
+    { word: '가상현실', difficulty: 5, hints: ['컴퓨터로 만든 세계', '실제처럼 느껴지는 디지털 환경'] },
+    { word: '증강현실', difficulty: 6, hints: ['현실에 가상 정보를 더한 것', '실제 화면에 디지털을 결합한 기술'] },
+    { word: '메타버스', difficulty: 6, hints: ['가상 세계와 현실이 융합된 공간', '3차원 가상 공간'] }
 ];
 
 // ===== Advanced Crossword Puzzle Game =====
@@ -927,11 +1014,13 @@ class AdvancedCrosswordGame {
 
         // 4순위: 온라인 단어 목록에서 가져오기 (비동기)
         if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
-            console.log('4순위: 온라인 단어 목록에서 가져오는 중...');
+            console.log(`4순위: ${currentLang} 온라인 단어 목록에서 가져오는 중...`);
             try {
-                // 실제 fetch 대신 placeholder 데이터 사용
-                const onlineWords = ONLINE_WORD_LIST_PLACEHOLDER_DATA; //await this.fetchOnlineWordList();
-                
+                // 언어별 온라인 단어 목록 선택
+                const onlineWords = currentLang === 'korean'
+                    ? ONLINE_WORD_LIST_PLACEHOLDER_DATA_KOREAN
+                    : ONLINE_WORD_LIST_PLACEHOLDER_DATA;
+
                 // 가져온 온라인 단어 목록에서 아직 DB에 없는 단어만 필터링하여 큐에 추가
                 const availableOnlineWords = onlineWords.filter(w => !existingWords.has(w.word) && !wordsToAddQueue.some(q => q.word === w.word));
                 const shuffledOnlineWords = this.shuffleArray(availableOnlineWords);
