@@ -1292,29 +1292,41 @@ class AdvancedCrosswordGame {
 
         // 4순위: 온라인 단어 목록에서 가져오기 (비동기)
         if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
-            console.log(`4순위: ${currentLang} 온라인 단어 목록에서 가져오는 중...`);
-            try {
-                // 언어별 온라인 단어 목록 선택
-                const onlineWords = currentLang === 'korean'
-                    ? ONLINE_WORD_LIST_PLACEHOLDER_DATA_KOREAN
-                    : ONLINE_WORD_LIST_PLACEHOLDER_DATA;
-
-                // 가져온 온라인 단어 목록에서 아직 DB에 없는 단어만 필터링하여 큐에 추가
-                const availableOnlineWords = onlineWords.filter(w => !existingWords.has(w.word) && !wordsToAddQueue.some(q => q.word === w.word));
-                const shuffledOnlineWords = this.shuffleArray(availableOnlineWords);
-
-                for (const wordObj of shuffledOnlineWords) {
-                    if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
-                        wordsToAddQueue.push(wordObj);
-                    } else {
-                        break;
+            if (currentLang === 'english') {
+                console.log(`4순위: 영어 온라인 단어 목록에서 가져오는 중...`);
+                try {
+                    const response = await fetch(`https://openapi.webservicetoday.com/api/open-api/random/word/eng?level=high&count=${WORDS_TO_ADD_PER_CLICK}`);
+                    if (!response.ok) {
+                        throw new Error(`API 요청 실패: ${response.status}`);
                     }
+                    const data = await response.json();
+                    if (data.words && data.words.length > 0) {
+                        const onlineWords = data.words.map(w => ({
+                            word: w.vocabulary.toUpperCase(),
+                            difficulty: 8, // 'high' level is mapped to difficulty 8
+                            hints: [w.mean]
+                        }));
+
+                        const availableOnlineWords = onlineWords.filter(w => !existingWords.has(w.word) && !wordsToAddQueue.some(q => q.word === w.word));
+                        for (const wordObj of availableOnlineWords) {
+                            if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
+                                wordsToAddQueue.push(wordObj);
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                } catch (onlineError) {
+                    console.error('❌ 온라인 영어 단어 목록 가져오기 실패:', onlineError);
+                    this.showError('온라인 영어 단어 목록을 가져오지 못했습니다. 로컬 단어를 사용합니다.');
+                    // Fallback to placeholder/local data if API fails
+                    addFromPool(ONLINE_WORD_LIST_PLACEHOLDER_DATA);
                 }
-                console.log(`4순위 온라인 풀 적용 후: ${wordsToAddQueue.length}개`);
-            } catch (onlineError) {
-                console.error('❌ 온라인 단어 목록 가져오기 실패:', onlineError);
-                this.showError('온라인 단어 목록을 가져오지 못했습니다.');
+            } else { // 'korean'
+                console.log(`4순위: 한국어 온라인 단어 목록 (플레이스홀더)에서 가져오는 중...`);
+                addFromPool(ONLINE_WORD_LIST_PLACEHOLDER_DATA_KOREAN);
             }
+            console.log(`4순위 풀 적용 후: ${wordsToAddQueue.length}개`);
         }
         
         // 최종적으로 큐에 있는 단어들을 DB에 저장
@@ -2115,6 +2127,7 @@ class AdvancedCrosswordGame {
 
         this.wordPositions.clear();
         this.completedWords.clear();
+        this.placedWords = []; // Reset placed words for new game
 
         // Only reset score if starting a new session
         if (this.isNewSession) {
@@ -2254,51 +2267,47 @@ class AdvancedCrosswordGame {
     }
 
     placeWordsOnGrid() {
-        // Simple placement algorithm
+        this.placedWords = []; // Reset placed words for new generation
         const centerRow = Math.floor(this.gridSize / 2);
         const centerCol = Math.floor(this.gridSize / 2);
 
-        // Place first word horizontally in center
-        // 첫 단어는 중간 길이를 선택하면 교차 기회가 많아짐
-        if (this.words.length > 0) {
-            // 중간 길이의 단어 찾기 (4-8자 사이 우선, 없으면 첫 단어 사용)
-            let firstWordIndex = 0;
-            for (let i = 0; i < this.words.length; i++) {
-                const len = this.words[i].word.length;
-                if (len >= 4 && len <= 8) {
-                    firstWordIndex = i;
-                    break;
-                }
-            }
-
-            // 선택된 단어를 첫 번째 위치와 교환
-            if (firstWordIndex !== 0) {
-                [this.words[0], this.words[firstWordIndex]] = [this.words[firstWordIndex], this.words[0]];
-            }
-
-            const startCol = Math.max(0, centerCol - Math.floor(this.words[0].word.length / 2));
-            this.placeWord(this.words[0], centerRow, startCol, 'across');
-            console.log(`✅ 첫 단어 배치: ${this.words[0].word} (길이: ${this.words[0].word.length})`);
+        if (this.words.length === 0) {
+            console.warn("No words selected for placement.");
+            return;
         }
 
-        // Place remaining words
-        for (let i = 1; i < this.words.length; i++) {
-            // 먼저 교차 배치 시도
-            let placed = this.findPlacementForWord(this.words[i]);
+        // Use properties set in selectWordsForCrossword
+        const minWords = this.minWordsForDifficulty || this.difficulty + 3;
+        const maxWords = this.maxWordsForDifficulty || (this.difficulty * 2) + 4;
 
-            // 교차 배치 실패 시 랜덤 배치 시도
-            if (!placed) {
-                console.log(`교차 배치 실패, 랜덤 배치 시도: ${this.words[i].word}`);
-                placed = this.placeWordRandomly(this.words[i]);
-                if (placed) {
-                    console.log(`✅ 랜덤 배치 성공: ${this.words[i].word}`);
-                } else {
-                    console.log(`❌ 랜덤 배치도 실패: ${this.words[i].word}`);
-                }
+        // 1. Place the first word
+        let firstWordIndex = 0;
+        let firstWord = this.words[firstWordIndex];
+        const startCol = Math.max(0, centerCol - Math.floor(firstWord.word.length / 2));
+        if (this.placeWord(firstWord, centerRow, startCol, 'across')) {
+            console.log(`✅ 첫 단어 배치: ${firstWord.word}`);
+        }
+
+        // 2. Place remaining words
+        const remainingWords = this.words.slice(1);
+        this.shuffleArray(remainingWords);
+
+        for (const wordObj of remainingWords) {
+            if (this.placedWords.length >= maxWords) {
+                console.log(`단어 최대 배치 개수 (${maxWords}개)에 도달하여 배치를 중단합니다.`);
+                break;
             }
+            let placed = this.findPlacementForWord(wordObj);
+            if (!placed) {
+                placed = this.placeWordRandomly(wordObj);
+            }
+        }
+        
+        console.log(`[배치 요약] ${this.words.length}개 단어 중 ${this.placedWords.length}개 단어 배치 성공.`);
 
-            // 배치에 실패한 단어는 words 배열에서 제거하지 않지만 clues에 추가하지 않음
-            // generateClues 메서드에서 row, col이 undefined인 단어는 자동으로 제외됨
+        if (this.placedWords.length < minWords) {
+            console.warn(`⚠️ 최종 배치된 단어 수가 최소 요구량보다 적습니다. (배치: ${this.placedWords.length}개, 최소: ${minWords}개)`);
+            this.showError(`퍼즐 단어가 부족합니다 (${this.placedWords.length}/${minWords}).`);
         }
     }
 
@@ -2337,6 +2346,7 @@ class AdvancedCrosswordGame {
         wordObj.col = col;
         wordObj.direction = direction;
         wordObj.answer = word;
+        this.placedWords.push(wordObj);
         return true; // 배치 성공
     }
 
@@ -2523,7 +2533,7 @@ class AdvancedCrosswordGame {
             down: []
         };
 
-        this.words.forEach(wordObj => {
+        this.placedWords.forEach(wordObj => {
             if (wordObj.row !== undefined && wordObj.col !== undefined) {
                 const clue = {
                     number: this.grid[wordObj.row][wordObj.col].number,
