@@ -2221,6 +2221,10 @@ class AdvancedCrosswordGame {
             }
         }
 
+        // Filter out single-letter words which are not suitable for a crossword
+        candidateWords = candidateWords.filter(wordObj => wordObj.word.length > 1);
+
+
         console.log(`[단어 선택] 총 후보 단어: ${candidateWords.length}개`);
         
         // 2. 만약 선택된 난이도에서 단어를 찾지 못했고, 선택된 난이도가 3보다 낮다면, 난이도 3까지 확장하여 다시 검색합니다.
