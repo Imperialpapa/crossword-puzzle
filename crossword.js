@@ -512,6 +512,89 @@ const POOL_TIER_3_ADVANCED = [
     { word: 'ONEROUS', difficulty: 7, hints: ['(of a task, duty, or responsibility) involving an amount of effort and difficulty that is oppressively burdensome', 'Burdensome'] }
 ];
 
+// ===== 한국어 단어 풀 =====
+const POOL_TIER_1_KOREAN = [
+    // Difficulty 4-6 (중급 한국어 단어)
+    { word: '가족', difficulty: 4, hints: ['혈연으로 이어진 사람들의 집단', '부모와 자녀로 이루어진 공동체'] },
+    { word: '교육', difficulty: 5, hints: ['지식과 기술을 가르치는 활동', '학교에서 하는 주요 활동'] },
+    { word: '문화', difficulty: 5, hints: ['한 사회의 생활 양식과 예술의 총체', '예술, 언어, 관습 등을 포함하는 개념'] },
+    { word: '사회', difficulty: 5, hints: ['사람들이 모여 이루는 집단', '공동생활을 하는 인간 집단'] },
+    { word: '경제', difficulty: 6, hints: ['재화와 용역의 생산과 분배', '돈과 자원의 관리 시스템'] },
+    { word: '과학', difficulty: 5, hints: ['자연 현상을 연구하는 학문', '실험과 관찰을 통해 지식을 얻는 분야'] },
+    { word: '역사', difficulty: 5, hints: ['과거에 일어난 사건들의 기록', '옛날부터 지금까지의 이야기'] },
+    { word: '환경', difficulty: 5, hints: ['생물이 살아가는 주변 조건', '자연과 생태계를 포함하는 공간'] },
+    { word: '건강', difficulty: 4, hints: ['몸과 마음이 정상적인 상태', '질병이 없고 튼튼한 상태'] },
+    { word: '평화', difficulty: 4, hints: ['전쟁이나 분쟁이 없는 상태', '고요하고 안정된 상태'] },
+    { word: '자유', difficulty: 5, hints: ['구속이나 제약을 받지 않는 상태', '스스로 선택하고 행동할 수 있는 권리'] },
+    { word: '정의', difficulty: 6, hints: ['올바르고 공정한 도리', '공평하고 바른 것'] },
+    { word: '발전', difficulty: 5, hints: ['더 나은 상태로 나아가는 것', '성장하고 향상되는 과정'] },
+    { word: '기술', difficulty: 4, hints: ['어떤 일을 하는 방법이나 능력', '과학적 지식을 실용화한 수단'] },
+    { word: '자연', difficulty: 4, hints: ['사람의 손이 닿지 않은 본래의 모습', '산, 바다, 하늘 등 천연의 세계'] },
+    { word: '미래', difficulty: 4, hints: ['아직 오지 않은 앞으로의 시간', '내일 이후의 모든 시간'] },
+    { word: '전통', difficulty: 5, hints: ['옛날부터 이어져 내려오는 풍습', '세대를 거쳐 전해지는 문화'] },
+    { word: '희망', difficulty: 4, hints: ['앞일에 대한 기대와 바람', '좋은 결과를 기대하는 마음'] },
+    { word: '우정', difficulty: 4, hints: ['친구 사이의 정', '서로 아끼고 돕는 친구 관계'] },
+    { word: '노력', difficulty: 4, hints: ['목표를 이루기 위해 힘쓰는 것', '애를 쓰며 힘을 다하는 행위'] }
+];
+
+const POOL_TIER_2_KOREAN = [
+    // Difficulty 1-3 (쉬운 한국어 단어)
+    { word: '집', difficulty: 1, hints: ['사람이 사는 건물', '가족이 함께 생활하는 곳'] },
+    { word: '물', difficulty: 1, hints: ['투명하고 마실 수 있는 액체', '생명에 꼭 필요한 것'] },
+    { word: '밥', difficulty: 1, hints: ['쌀을 지은 음식', '한국인의 주식'] },
+    { word: '책', difficulty: 1, hints: ['글이나 그림이 있는 종이를 묶은 것', '읽으면 지식을 얻는 것'] },
+    { word: '꽃', difficulty: 1, hints: ['식물에서 피는 아름다운 것', '향기가 나는 식물의 생식 기관'] },
+    { word: '나무', difficulty: 1, hints: ['줄기가 단단하고 큰 식물', '숲을 이루는 식물'] },
+    { word: '하늘', difficulty: 2, hints: ['땅 위의 높은 공간', '구름과 별이 있는 곳'] },
+    { word: '바다', difficulty: 2, hints: ['지구의 넓은 물 공간', '파도가 치는 짠 물'] },
+    { word: '산', difficulty: 1, hints: ['땅이 높이 솟아 있는 지형', '등산하는 곳'] },
+    { word: '달', difficulty: 1, hints: ['밤하늘에 뜨는 천체', '지구의 위성'] },
+    { word: '별', difficulty: 1, hints: ['밤하늘에 빛나는 것', '우주의 항성'] },
+    { word: '비', difficulty: 1, hints: ['하늘에서 떨어지는 물', '구름에서 내리는 물방울'] },
+    { word: '눈', difficulty: 1, hints: ['하늘에서 내리는 하얀 얼음 결정', '겨울에 내리는 하얀 것'] },
+    { word: '바람', difficulty: 2, hints: ['공기가 흐르는 현상', '움직이는 공기'] },
+    { word: '사랑', difficulty: 2, hints: ['소중히 여기고 아끼는 마음', '가장 강한 긍정적 감정'] },
+    { word: '학교', difficulty: 2, hints: ['학생들이 공부하는 곳', '선생님이 가르치는 기관'] },
+    { word: '친구', difficulty: 2, hints: ['서로 친하게 지내는 사람', '함께 놀고 이야기하는 동무'] },
+    { word: '운동', difficulty: 2, hints: ['몸을 움직이는 활동', '건강을 위해 하는 신체 활동'] },
+    { word: '음악', difficulty: 2, hints: ['소리로 표현하는 예술', '노래나 악기로 만드는 소리'] },
+    { word: '영화', difficulty: 2, hints: ['영상으로 만든 이야기', '영화관에서 보는 작품'] },
+    { word: '여행', difficulty: 3, hints: ['다른 곳으로 가서 구경하는 것', '관광이나 휴식을 위해 떠나는 것'] },
+    { word: '시간', difficulty: 3, hints: ['과거, 현재, 미래의 흐름', '시계로 재는 것'] },
+    { word: '공간', difficulty: 3, hints: ['물체가 존재하는 빈 곳', '3차원적 넓이'] },
+    { word: '마음', difficulty: 3, hints: ['생각과 감정이 있는 곳', '정신적인 것'] },
+    { word: '생각', difficulty: 3, hints: ['머리로 하는 정신 활동', '의식적으로 무엇을 떠올리는 것'] },
+    { word: '말', difficulty: 2, hints: ['입으로 하는 소리', '의사소통의 수단'] },
+    { word: '글', difficulty: 2, hints: ['문자로 쓴 것', '생각을 기록한 것'] },
+    { word: '색', difficulty: 2, hints: ['눈으로 보는 빛깔', '빨강, 파랑, 노랑 같은 것'] },
+    { word: '소리', difficulty: 2, hints: ['귀로 듣는 것', '공기의 진동'] },
+    { word: '빛', difficulty: 2, hints: ['눈으로 볼 수 있게 하는 것', '밝게 비추는 것'] }
+];
+
+const POOL_TIER_3_KOREAN = [
+    // Difficulty 7-10 (고급 한국어 단어)
+    { word: '철학', difficulty: 7, hints: ['인생과 세계의 근본 원리를 탐구하는 학문', '존재와 진리에 대한 깊은 사유'] },
+    { word: '심리', difficulty: 7, hints: ['마음의 상태와 작용', '인간의 정신 활동을 연구하는 분야'] },
+    { word: '윤리', difficulty: 7, hints: ['사람이 지켜야 할 도리', '도덕적 원칙과 규범'] },
+    { word: '논리', difficulty: 7, hints: ['생각의 법칙', '올바른 추론의 원리'] },
+    { word: '가치', difficulty: 6, hints: ['중요하고 소중한 정도', '의미와 쓸모'] },
+    { word: '본질', difficulty: 8, hints: ['사물의 근본적인 성질', '가장 중요한 핵심'] },
+    { word: '현상', difficulty: 7, hints: ['나타나는 모습이나 상태', '관찰할 수 있는 사실'] },
+    { word: '개념', difficulty: 7, hints: ['사물에 대한 일반적인 지식', '어떤 것의 의미와 정의'] },
+    { word: '체계', difficulty: 7, hints: ['일정한 원리에 따라 조직된 전체', '통일된 조직이나 계통'] },
+    { word: '원리', difficulty: 6, hints: ['사물의 근본이 되는 법칙', '기본적인 이치'] },
+    { word: '구조', difficulty: 6, hints: ['각 부분의 배치와 짜임새', '조직된 체계의 틀'] },
+    { word: '기능', difficulty: 6, hints: ['사물이나 조직이 하는 역할', '작동하여 나타내는 효과'] },
+    { word: '과정', difficulty: 6, hints: ['일이 진행되는 경로', '처음부터 끝까지의 단계'] },
+    { word: '결과', difficulty: 5, hints: ['어떤 일이 끝나서 나타난 것', '원인에 따라 생긴 상태'] },
+    { word: '영향', difficulty: 6, hints: ['어떤 것이 다른 것에 미치는 작용', '결과를 끼치는 힘'] },
+    { word: '관계', difficulty: 5, hints: ['둘 이상의 사물이 서로 맺는 연결', '상호 작용하는 상태'] },
+    { word: '변화', difficulty: 5, hints: ['달라지는 것', '모습이나 상태가 바뀌는 것'] },
+    { word: '성장', difficulty: 5, hints: ['크거나 많아지는 것', '발달하고 발전하는 과정'] },
+    { word: '창조', difficulty: 7, hints: ['새로운 것을 만들어 내는 것', '무에서 유를 만드는 행위'] },
+    { word: '혁신', difficulty: 7, hints: ['묵은 것을 완전히 바꾸어 새롭게 하는 것', '획기적인 변화와 발전'] }
+];
+
 const ONLINE_WORD_LIST_URL = 'https://example.com/your-dynamic-wordlist.json'; // 사용자 정의 온라인 단어 목록 URL을 여기에 입력하세요
 const ONLINE_WORD_LIST_PLACEHOLDER_DATA = [
     // Placeholder for words fetched from an online source (e.g., neologisms, contemporary words)
@@ -779,11 +862,15 @@ class AdvancedCrosswordGame {
         let addedCount = 0;
         const wordsToAddQueue = [];
         const existingWords = new Set();
-        
-        // 현재 DB에 있는 모든 영어 단어를 Set으로 가져옵니다.
-        const englishDB = this.wordDatabase.get('english');
-        if (englishDB) {
-            for (const words of englishDB.values()) {
+
+        // 현재 선택된 언어 가져오기
+        const currentLang = this.language;
+        console.log(`📝 현재 선택된 언어: ${currentLang}`);
+
+        // 현재 DB에 있는 해당 언어의 모든 단어를 Set으로 가져옵니다.
+        const langDB = this.wordDatabase.get(currentLang);
+        if (langDB) {
+            for (const words of langDB.values()) {
                 words.forEach(wordObj => existingWords.add(wordObj.word));
             }
         }
@@ -801,20 +888,41 @@ class AdvancedCrosswordGame {
             }
         };
 
-        // 1순위: POOL_TIER_1_SAT
-        addFromPool(POOL_TIER_1_SAT);
-        console.log(`1순위 풀 적용 후: ${wordsToAddQueue.length}개`);
+        // 언어별로 다른 풀 사용
+        if (currentLang === 'korean') {
+            // 한국어 풀 사용
+            // 1순위: POOL_TIER_1_KOREAN
+            addFromPool(POOL_TIER_1_KOREAN);
+            console.log(`1순위 한국어 풀 적용 후: ${wordsToAddQueue.length}개`);
 
-        // 2순위: POOL_TIER_2_GENERAL
-        if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
-            addFromPool(POOL_TIER_2_GENERAL);
-            console.log(`2순위 풀 적용 후: ${wordsToAddQueue.length}개`);
-        }
+            // 2순위: POOL_TIER_2_KOREAN
+            if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
+                addFromPool(POOL_TIER_2_KOREAN);
+                console.log(`2순위 한국어 풀 적용 후: ${wordsToAddQueue.length}개`);
+            }
 
-        // 3순위: POOL_TIER_3_ADVANCED
-        if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
-            addFromPool(POOL_TIER_3_ADVANCED);
-            console.log(`3순위 풀 적용 후: ${wordsToAddQueue.length}개`);
+            // 3순위: POOL_TIER_3_KOREAN
+            if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
+                addFromPool(POOL_TIER_3_KOREAN);
+                console.log(`3순위 한국어 풀 적용 후: ${wordsToAddQueue.length}개`);
+            }
+        } else {
+            // 영어 풀 사용
+            // 1순위: POOL_TIER_1_SAT
+            addFromPool(POOL_TIER_1_SAT);
+            console.log(`1순위 영어 풀 적용 후: ${wordsToAddQueue.length}개`);
+
+            // 2순위: POOL_TIER_2_GENERAL
+            if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
+                addFromPool(POOL_TIER_2_GENERAL);
+                console.log(`2순위 영어 풀 적용 후: ${wordsToAddQueue.length}개`);
+            }
+
+            // 3순위: POOL_TIER_3_ADVANCED
+            if (wordsToAddQueue.length < WORDS_TO_ADD_PER_CLICK) {
+                addFromPool(POOL_TIER_3_ADVANCED);
+                console.log(`3순위 영어 풀 적용 후: ${wordsToAddQueue.length}개`);
+            }
         }
 
         // 4순위: 온라인 단어 목록에서 가져오기 (비동기)
@@ -845,7 +953,7 @@ class AdvancedCrosswordGame {
         // 최종적으로 큐에 있는 단어들을 DB에 저장
         for (const wordObj of wordsToAddQueue) {
             const { word, hints, difficulty } = wordObj;
-            const lang = 'english'; // 현재는 영어만 가정
+            const lang = currentLang; // 현재 선택된 언어 사용
 
             // 로컬 DB에 추가
             if (this.wordDatabase.get(lang)?.has(difficulty)) {
@@ -858,6 +966,7 @@ class AdvancedCrosswordGame {
             }
         }
 
+        console.log(`✅ ${currentLang} 언어로 ${addedCount}개의 단어가 추가되었습니다.`);
         return addedCount;
     }
     
@@ -878,21 +987,35 @@ class AdvancedCrosswordGame {
     }
 
 
-    getWordCount() {
-        let totalWords = 0;
-        for (const [lang, difficulties] of this.wordDatabase.entries()) {
-            for (const [diff, words] of difficulties.entries()) {
-                totalWords += words.length;
+    getWordCount(language = null) {
+        if (language) {
+            // 특정 언어의 단어 수만 반환
+            let count = 0;
+            const langDB = this.wordDatabase.get(language);
+            if (langDB) {
+                for (const words of langDB.values()) {
+                    count += words.length;
+                }
             }
+            return count;
+        } else {
+            // 모든 언어의 단어 수 반환
+            let totalWords = 0;
+            for (const [lang, difficulties] of this.wordDatabase.entries()) {
+                for (const [diff, words] of difficulties.entries()) {
+                    totalWords += words.length;
+                }
+            }
+            return totalWords;
         }
-        return totalWords;
     }
 
     updateWordCount() {
-        const totalWords = this.getWordCount();
+        const englishCount = this.getWordCount('english');
+        const koreanCount = this.getWordCount('korean');
         const countElement = document.getElementById('currentWordCount');
         if (countElement) {
-            countElement.textContent = totalWords;
+            countElement.textContent = `영어: ${englishCount}개, 한국어: ${koreanCount}개`;
         }
     }
 
@@ -1088,6 +1211,9 @@ class AdvancedCrosswordGame {
         
         this.languageSelect.addEventListener('change', (e) => {
             this.language = e.target.value;
+            console.log(`🌐 언어 변경: ${this.language}`);
+            // 단어 카운트 업데이트 (언어별 표시)
+            this.updateWordCount();
         });
         
         this.gameTimerSelect.addEventListener('change', (e) => {
