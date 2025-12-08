@@ -2231,15 +2231,26 @@ class AdvancedCrosswordGame {
         const shuffledCandidates = this.shuffleArray(candidateWords);
 
         // 4. 난이도에 따라 필요한 단어 개수를 계산하고 그만큼 자름
+        // 최소: 난이도 + 3, 최대: 난이도 * 2 + 4
+        // 예: 난이도 3 → 최소 6개, 최대 10개
+        const minWordsForDifficulty = this.difficulty + 3;
         const maxWordsForDifficulty = (this.difficulty * 2) + 4;
+
+        // 실제 선택할 단어 수: 후보 단어 수와 최대값 중 작은 것
         const wordsToPlaceCount = Math.min(shuffledCandidates.length, maxWordsForDifficulty);
-        
+
+        // 후보 단어가 최소 요구량보다 적으면 경고
+        if (wordsToPlaceCount < minWordsForDifficulty) {
+            console.warn(`⚠️ 후보 단어가 부족합니다. 최소: ${minWordsForDifficulty}개, 현재: ${wordsToPlaceCount}개`);
+            this.showError(`플레이하기에 단어가 부족합니다. 단어 DB를 업데이트해주세요. (필요: ${minWordsForDifficulty}개, 현재: ${wordsToPlaceCount}개)`);
+        }
+
         this.words = shuffledCandidates.slice(0, wordsToPlaceCount).map(w => ({
             word: w.word,
             hints: Array.isArray(w.hints) ? [...w.hints] : [w.hints]
         }));
-        
-        console.log(`선택된 단어 수: ${this.words.length}`);
+
+        console.log(`선택된 단어 수: ${this.words.length} (난이도: ${this.difficulty}, 범위: ${minWordsForDifficulty}~${maxWordsForDifficulty}개)`);
     }
 
     placeWordsOnGrid() {
